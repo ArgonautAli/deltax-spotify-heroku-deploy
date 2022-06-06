@@ -1,0 +1,96 @@
+<div class="container" >
+<h3 class="mt-2">Adding new song</h3>
+
+
+    <div class="form-group row mt-2 mb-2">
+        <form [formGroup] ="formValue" >
+        <label for="inputSong" class="col-sm-2 col-form-label">Song Name</label>
+        <div class="col-sm-10">
+        <input type="name" class="form-control" id="inputSong" formControlName="songName">
+        </div>
+
+        
+        <label class="col-sm-2 col-form-label mt-2 " for="inlineFormCustomSelect" >Artist name</label>
+        
+     
+        <div class="col-sm-10 mt-2" >
+        <select class="custom-select mr-sm-2" id="artistName" formControlName="artistName"  >
+        <option selected >Search...</option>
+        <option  *ngFor="let row of artistData"> {{ row.nameArtist }}</option>
+        </select>
+        
+        <button class="border-1 mx-2" routerLink="addArtist" (click)="open(content)" (click)="getArtistDetails()"> Add Artist</button>
+        
+        </div>
+        
+    
+        <label for="artworkUpdate" class="col-sm-2 col-form-label mt-2 mb-2">Add artwork</label>
+        <div class="col-sm-10" >
+            <input  type="file" class="form-control-file mt-2 mb-2" id="artworkUpdate" formControlName="artwork" accept="image/*"  >
+        </div>
+
+        <label for="inputDate" class="col-sm-2 col-form-label">Release Date</label>
+        <div class="col-sm-10">
+            <input type="name" class="form-control" id="inputSong" placeholder="dd/mm/yy" formControlName="releaseDate">
+        </div>
+
+        <label for="inputRate" class="col-sm-2 col-form-label">Rating</label>
+        <rating formControlName="rating" style="color: #0275d8;font-size: 40px;" [(ngModel)]="rate" [max]="max" [readonly]="isReadonly">
+          {{rate}}
+        </rating>
+
+
+
+
+      </form>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="postSongDetails()">Add Song</button>
+
+
+
+</div>
+
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Artist</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formArtist" #artistId = "ngForm" >
+        <div class="mb-3 mt-2">
+
+        <label for="inputName" class="sm-2 mt-2 ">Artist Name</label>
+        <div class="col-sm-10">
+        <input type="name" class="form-control" id="inputName" ngModel name="artistName" formControlName="nameArtist">
+        </div>
+
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group mt-2">
+        <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" ngModel name="artistDate" formControlName="dobArtist">
+        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+        </div>
+
+        <div class="form-group mt-2">
+            <label for="InputBio" >Bio</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ngModel name="artistBio" formControlName="bioArtist"></textarea>
+        </div>
+
+        </div>
+      
+    
+      <button class="btn btn-outline-dark" (click)="modal.close('Save click')" (click)="getArtistDetails()" (click)="postArtistDetails()"  >Save</button>
+   
+  </form>
+</div>
+  </ng-template>
+  
+
+  
+
+  
+
+  
+

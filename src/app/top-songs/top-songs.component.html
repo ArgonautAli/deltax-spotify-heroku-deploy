@@ -1,0 +1,55 @@
+
+<div class="container">
+
+
+    <div class="text-right" >
+    
+    <h2 class="mt-2" style="color: #0d6efd;" style="display:inline-block ;">Top 10 Songs</h2>
+    <button  type="button" class="btn btn-primary float-end mt-2" target="" routerLink="addSong" >+ Add Song</button>
+    
+    
+    </div>
+    
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="term" >
+        <button class="btn btn-outline-success" type="submit" >Search</button>
+    
+    
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Artwork</th>
+                <th>Serial No.</th>
+                <th>Song Name</th>
+                <th>Artist</th>
+                <th>Date of release</th>
+                <th>Rate</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of songData | filter: term">
+                <td class="img">
+                <img width="100px" height="100px" src={{row.artwork}} alt="">{{row.artwork}}
+                </td>
+                <td>{{row.id}}</td>
+                <td>{{row.songName}}</td>
+                <td>{{row.artistName}}</td>
+                <td>{{row.releaseDate}}</td>
+                <td>
+                    <rating  style="color: #0275d8;font-size: 40px;" [(ngModel)]="row.rating" [max]="max" [readonly]="!isReadonly">
+                        {{row.rating}}
+                    </rating>
+                </td>
+                <td>
+                    <button class="btn btn-danger mx-3" (click)="deleteSongData(row)" >Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+    
+</div> 
+    
+    
+        
